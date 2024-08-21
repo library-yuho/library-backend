@@ -29,7 +29,7 @@ jobs:
       run: chmod +x ./gradlew
 
     - name: Build with Gradle Wrapper
-      run: ./gradlew omaju-app-api:build
+      run: ./gradlew build
 
     # 3. docker Image 메타데이터 생성 및 관리
     - name: Docker Meta
@@ -53,7 +53,7 @@ jobs:
     - name: Docker Build and Dockerhub Push
       uses: docker/build-push-action@v2
       with:
-        context: ./omaju-app-api
+        context: .
         platforms: |
           linux/amd64
           linux/arm64/v8
