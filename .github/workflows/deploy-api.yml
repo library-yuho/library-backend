@@ -79,4 +79,4 @@ jobs:
             docker rm -f ${{ secrets.DOCKER_CONTAINER_API }}
             docker pull ${{ secrets.DOCKER_IMAGE_API }}:latest
             docker image prune -f
-            docker run --name ${{ secrets.DOCKER_CONTAINER_API }} --env-file=$HOME/backup/.env --network omaju -p 8000:8080 -d ${{ secrets.DOCKER_IMAGE_API }}:latest
+            docker run --name ${{ secrets.DOCKER_CONTAINER_API }} --env-file=$HOME/backup/.env --network omaju -p 8080:8080 -d ${{ secrets.DOCKER_IMAGE_API }}:latest
