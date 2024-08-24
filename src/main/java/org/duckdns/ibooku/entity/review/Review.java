@@ -35,12 +35,12 @@ public class Review extends BaseEntity {
 
     private Double lon;
 
-    private int point;
+    private double point;
 
     private boolean isSpoiler;
 
     @Builder
-    public Review(int id, User user, Book book, String content, Double lat, Double lon, int point, boolean isSpoiler) {
+    public Review(int id, User user, Book book, String content, Double lat, Double lon, double point, boolean isSpoiler) {
         this.id = id;
         this.user = user;
         this.book = book;
