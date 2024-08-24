@@ -22,6 +22,7 @@ public class BookService {
         return result.stream()
                 .map(book -> BookResponseDTO.builder()
                         .name(book.getName())
+                        .isbn(book.getIsbn())
                         .author(book.getAuthor())
                         .publisher(book.getPublisher())
                         .content(book.getContent())
