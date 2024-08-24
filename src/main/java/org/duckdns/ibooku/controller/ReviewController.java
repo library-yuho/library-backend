@@ -1,12 +1,10 @@
 package org.duckdns.ibooku.controller;
 
 import lombok.RequiredArgsConstructor;
+import org.duckdns.ibooku.dto.request.review.ReviewRequestDTO;
 import org.duckdns.ibooku.dto.response.review.ReviewResponseDTO;
 import org.duckdns.ibooku.service.review.ReviewService;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -23,5 +21,11 @@ public class ReviewController {
             @RequestParam boolean isSpoiler,
             @RequestParam String sortType) {
         return reviewService.list(isbn, email, isSpoiler, sortType);
+    }
+
+    @PostMapping("/write")
+    public String write(@RequestBody ReviewRequestDTO reviewRequest) {
+        reviewService.write(reviewRequest);
+        return "success";
     }
 }
