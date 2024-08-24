@@ -32,6 +32,10 @@ public class Book extends BaseEntity {
     private String image;
 
     @NotNull
+    @Column(length = 500)
+    private String content;
+
+    @NotNull
     @Column(length = 200)
     private String author;
 
@@ -54,11 +58,13 @@ public class Book extends BaseEntity {
     private int checkout;
 
     @Builder
-    public Book(int id, Library library, int code, String name, String author, String publisher, int publishYear, String isbn, String subjectNo, int count, int checkout) {
+    public Book(int id, Library library, int code, String name, String image, String content, String author, String publisher, int publishYear, String isbn, String subjectNo, int count, int checkout) {
         this.id = id;
         this.library = library;
         this.code = code;
         this.name = name;
+        this.image = image;
+        this.content = content;
         this.author = author;
         this.publisher = publisher;
         this.publishYear = publishYear;
