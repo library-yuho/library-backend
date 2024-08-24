@@ -36,7 +36,7 @@ dependencies {
 
 	// swagger-openapi
 	implementation 'org.springdoc:springdoc-openapi-starter-webmvc-ui:2.0.2'
-	implementation group: 'com.fasterxml.jackson.core', name: 'jackson-annotations', version: '2.13.3'
+	implementation group: 'com.fasterxml.jackson.core', name: 'jackson-annotations'
 
 	// spring security
 	implementation 'org.springframework.boot:spring-boot-starter-security:3.0.4'
