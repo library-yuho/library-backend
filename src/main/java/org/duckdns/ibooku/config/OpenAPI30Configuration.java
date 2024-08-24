@@ -12,7 +12,7 @@ public class OpenAPI30Configuration {
     public OpenAPI customizeOpenAPI() {
         final String securitySchemeName = "bearerAuth";
         return new OpenAPI()
-                .addServersItem(new Server().url("/api/v1/"))
+                .addServersItem(new Server().url("/"))
                 .addSecurityItem(new SecurityRequirement()
                         .addList(securitySchemeName)
                 );
