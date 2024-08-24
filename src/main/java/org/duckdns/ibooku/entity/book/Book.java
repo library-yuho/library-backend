@@ -28,6 +28,10 @@ public class Book extends BaseEntity {
     private String name;
 
     @NotNull
+    @Column(length = 500)
+    private String image;
+
+    @NotNull
     @Column(length = 200)
     private String author;
 
