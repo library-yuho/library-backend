@@ -30,4 +30,17 @@ public class BookService {
                         .build())
                 .collect(Collectors.toList());
     }
+
+    public BookResponseDTO info(String isbn) {
+        Book book = bookRepository.findByIsbn(isbn);
+
+        return BookResponseDTO.builder()
+                .name(book.getName())
+                .isbn(book.getIsbn())
+                .author(book.getAuthor())
+                .publisher(book.getPublisher())
+                .content(book.getContent())
+                .point(0.0)
+                .build();
+    }
 }
