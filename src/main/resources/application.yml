@@ -5,8 +5,8 @@ spring:
     datasource:
         driver-class-name: org.mariadb.jdbc.Driver
         url: jdbc:mariadb://ibooku.duckdns.org:3306/ibooku
-        username: ibooku
-        password: ibooku0503!
+        username: ${MARIADB_USERNAME}
+        password: ${MARIADB_PASSWORD}
 
     jpa:
         open-in-view: false # Lazy loading을 사용하기 위해 Session을 Controller까지 유지하는 옵션
@@ -26,6 +26,19 @@ spring:
     sql:
         init:
             mode: always
+
+    mail:
+        host: smtp.gmail.com
+        port: 587
+        username: ${MAIL_USERNAME}
+        password: ${MAIL_PASSWORD}
+        properties:
+            mail:
+                smtp:
+                    auth: true
+                    timeout: 5000
+                    starttls:
+                        enable: true
 
 logging:
     log4j2:
