@@ -46,6 +46,9 @@ dependencies {
 
 	// gson
 	implementation 'com.google.code.gson:gson:2.10.1'
+
+	// http
+	implementation 'org.apache.httpcomponents:httpclient:4.5.13'
 }
 
 tasks.named('test') {
