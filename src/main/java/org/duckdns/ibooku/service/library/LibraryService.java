@@ -53,66 +53,31 @@ public class LibraryService {
     }
 
     private boolean isBookExist(String isbn, String libCode) {
-//        String url = String.format("https://data4library.kr/api/libSrch?authKey=%s&pageNo=%d&pageSize=10&format=json", KEY_LIBRARY_BIGDATA, page);
-//
-//        Header header = new Header();
-////                .append("User-Agent", HTTPUtils.USER_AGENT)
-////                .append("Accept-Language", HTTPUtils.ACCEPT_LANGUAGE)
-////                .append("Accept-Encoding", HTTPUtils.ACCEPT_ENCODING)
-////                .append("Connection", HTTPUtils.CONNECTION);
-//
-//        try {
-//            Get get = new Get(url)
-//                    .setHeader(header)
-//                    .execute();
-//
-//            int responseCode = get.getResponseCode();
-//            if (responseCode != org.apache.http.HttpStatus.SC_OK) {
-//                log.debug("responseCode: {}", responseCode);
-//                throw new RuntimeException("통신 오류: " + get.getUrl());
-//            }
-//
-//            JsonObject jsonObject = JSONUtils.parse(get.getResult());
-//            JsonObject response = jsonObject.getAsJsonObject("response");
-//            JsonArray libs = response.getAsJsonArray("libs");
-//
-//
-//            for (Object o: libs) {
-//                JsonObject obj = (JsonObject) o;
-//                JsonObject lib = obj.getAsJsonObject("lib");
-//
-//                String name = lib.get("libName").getAsString();
-//                String libCode = lib.get("libCode").getAsString();
-//                String address = lib.get("address").getAsString();
-//                String content = lib.get("operatingTime") == null ? null : lib.get("operatingTime").getAsString();
-//                String telephone = lib.get("tel").getAsString();
-//                String website = lib.get("homepage").getAsString();
-//                Double lat = Double.parseDouble(lib.get("latitude").getAsString());
-//                Double lon = Double.parseDouble(lib.get("longitude").getAsString());
-//
-//                Library library = Library.builder()
-//                        .name(name)
-//                        .libCode(libCode)
-//                        .address(address)
-//                        .content(content)
-//                        .telephone(telephone)
-//                        .website(website)
-//                        .lat(lat)
-//                        .lon(lon)
-//                        .build();
-//
-//                libraryRepository.save(library);
-//
-//                System.out.println(num + "/1458 -> 남은개수 : " + (1458-num));
-//                num++;
-//            }
-//        } catch(Exception e) {
-//            e.printStackTrace();
-//            log.error("통신 오류가 발생했습니다.");
-//            throw new RuntimeException();
-//        }
+        String url = String.format("https://data4library.kr/api/bookExist?authKey=%s&libCode=%s&isbn13=%s&format=json", KEY_LIBRARY_BIGDATA, libCode, isbn);
 
-        return false;
+        Header header = new Header();
+
+        try {
+            Get get = new Get(url)
+                    .setHeader(header)
+                    .execute();
+
+            int responseCode = get.getResponseCode();
+            if (responseCode != org.apache.http.HttpStatus.SC_OK) {
+                log.debug("responseCode: {}", responseCode);
+                throw new RuntimeException("통신 오류: " + get.getUrl());
+            }
+
+            JsonObject jsonObject = JSONUtils.parse(get.getResult());
+            JsonObject response = jsonObject.getAsJsonObject("response");
+            JsonObject result = response.getAsJsonObject("result");
+
+            return result.get("loanAvailable").getAsString().equals("Y") ? true : false;
+        } catch(Exception e) {
+            e.printStackTrace();
+            log.error("통신 오류가 발생했습니다.");
+            throw new RuntimeException();
+        }
     }
 
     private double distance(double lat, double lon, Library library) {
