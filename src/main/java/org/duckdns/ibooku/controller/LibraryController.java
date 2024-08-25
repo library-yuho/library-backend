@@ -17,8 +17,8 @@ public class LibraryController {
     private final LibraryService libraryService;
 
     @GetMapping("/list")
-    public List<LibraryResponseDTO> list(@RequestParam double lat, @RequestParam double lon) {
-        return libraryService.list(lat, lon);
+    public List<LibraryResponseDTO> list(@RequestParam String isbn, @RequestParam double lat, @RequestParam double lon) {
+        return libraryService.list(isbn, lat, lon);
     }
 
 //    @GetMapping("/insert")

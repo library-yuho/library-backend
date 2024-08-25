@@ -15,9 +15,11 @@ public class LibraryResponseDTO {
     private String website;
     private Double lat;
     private Double lon;
+    private boolean isBookExist;
+    private Double distance;
 
     @Builder
-    public LibraryResponseDTO(int id, String name, String libCode, String address, String content, String telephone, String website, Double lat, Double lon) {
+    public LibraryResponseDTO(int id, String name, String libCode, String address, String content, String telephone, String website, Double lat, Double lon, boolean isBookExist, Double distance) {
         this.id = id;
         this.name = name;
         this.libCode = libCode;
@@ -27,5 +29,7 @@ public class LibraryResponseDTO {
         this.website = website;
         this.lat = lat;
         this.lon = lon;
+        this.isBookExist = isBookExist;
+        this.distance = distance;
     }
 }

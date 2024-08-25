@@ -29,7 +29,9 @@ public class LibraryService {
 
     private final LibraryRepository libraryRepository;
 
-    public List<LibraryResponseDTO> list(double lat, double lon) {
+    public List<LibraryResponseDTO> list(String isbn, double lat, double lon) {
+
+
         return libraryRepository.findAll().stream()
                 .map(library -> LibraryResponseDTO.builder()
                         .id(library.getId())
@@ -40,6 +42,8 @@ public class LibraryService {
                         .website(library.getWebsite())
                         .lat(library.getLat())
                         .lon(library.getLon())
+                        .isBookExist(false)
+                        .distance(1.23)
                         .build())
                 .collect(Collectors.toList());
     }
