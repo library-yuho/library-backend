@@ -24,8 +24,8 @@ public class ReviewController {
     }
 
     @PostMapping("/write")
-    public String write(@RequestBody ReviewRequestDTO reviewRequest) {
+    public boolean write(@RequestBody ReviewRequestDTO reviewRequest) {
         reviewService.write(reviewRequest);
-        return "success";
+        return true;
     }
 }
