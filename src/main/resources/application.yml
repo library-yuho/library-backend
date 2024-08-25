@@ -47,3 +47,7 @@ spring:
 logging:
     log4j2:
         config: log4j2.yml
+
+api-key:
+    library-bigdata: ${KEY_LIBRARY_BIGDATA}
+    nl: ${KEY_NL}
