@@ -20,4 +20,9 @@ public class LibraryController {
     public List<LibraryResponseDTO> list(@RequestParam double lat, @RequestParam double lon) {
         return libraryService.list(lat, lon);
     }
+
+//    @GetMapping("/insert")
+//    public String insert() {
+//        return libraryService.insert();
+//    }
 }

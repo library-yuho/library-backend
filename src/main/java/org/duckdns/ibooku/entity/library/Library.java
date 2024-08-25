@@ -20,6 +20,10 @@ public class Library {
     private String name;
 
     @NotNull
+    @Column(length = 50)
+    private String libCode;
+
+    @NotNull
     @Column(length = 200)
     private String address;
 
@@ -28,21 +32,22 @@ public class Library {
     private String content;
 
     @NotNull
-    @Column(length = 50)
+    @Column(length = 200)
     private String telephone;
 
     @NotNull
     @Column(length = 500)
     private String website;
 
-    private double lat;
+    private Double lat;
 
-    private double lon;
+    private Double lon;
 
     @Builder
-    public Library(int id, String name, String address, String content, String telephone, String website, double lat, double lon) {
+    public Library(int id, String name, String libCode, String address, String content, String telephone, String website, Double lat, Double lon) {
         this.id = id;
         this.name = name;
+        this.libCode = libCode;
         this.address = address;
         this.content = content;
         this.telephone = telephone;
