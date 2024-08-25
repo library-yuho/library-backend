@@ -55,11 +55,10 @@ public class ReviewService {
 
     public void write(ReviewRequestDTO reviewRequest) {
         User user = userRepository.findByEmail(reviewRequest.getEmail());
-        Book book = bookRepository.findByIsbn(reviewRequest.getIsbn());
 
         Review review = Review.builder()
                 .user(user)
-                .book(book)
+                .isbn(reviewRequest.getIsbn())
                 .content(reviewRequest.getContent())
                 .lat(reviewRequest.getLat())
                 .lon(reviewRequest.getLon())

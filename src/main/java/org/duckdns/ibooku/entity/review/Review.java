@@ -23,9 +23,9 @@ public class Review extends BaseEntity {
     @JoinColumn(name = "user_id", nullable = false)
     private User user;
 
-    @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "book_id", nullable = false)
-    private Book book;
+    @NotNull
+    @Column(length = 50)
+    private String isbn;
 
     @NotNull
     @Column(length = 2048)
@@ -40,10 +40,10 @@ public class Review extends BaseEntity {
     private boolean isSpoiler;
 
     @Builder
-    public Review(int id, User user, Book book, String content, Double lat, Double lon, double point, boolean isSpoiler) {
+    public Review(int id, User user, String isbn, String content, Double lat, Double lon, double point, boolean isSpoiler) {
         this.id = id;
         this.user = user;
-        this.book = book;
+        this.isbn = isbn;
         this.content = content;
         this.lat = lat;
         this.lon = lon;
