@@ -8,10 +8,7 @@ import org.duckdns.ibooku.dto.request.user.ValidateEmailRequestDTO;
 import org.duckdns.ibooku.dto.response.user.LoginResponseDTO;
 import org.duckdns.ibooku.entity.user.User;
 import org.duckdns.ibooku.service.user.UserService;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 @RestController
 @RequestMapping("/user")
@@ -52,5 +49,10 @@ public class UserController {
                 .birth(user.getBirth())
                 .result(true)
                 .build();
+    }
+
+    @GetMapping("email-check")
+    public boolean emailCheck(@RequestParam String email) {
+        return userService.emailCheck(email);
     }
 }

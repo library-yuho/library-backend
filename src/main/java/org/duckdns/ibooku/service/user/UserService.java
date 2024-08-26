@@ -108,4 +108,14 @@ public class UserService {
 
         return null;
     }
+
+    public boolean emailCheck(String email) {
+        User user = userRepository.findByEmail(email);
+
+        if (user == null) {
+            return false;
+        }
+
+        return true;
+    }
 }
