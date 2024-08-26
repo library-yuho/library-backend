@@ -2,12 +2,14 @@ package org.duckdns.ibooku.service.book;
 
 import com.google.gson.JsonArray;
 import com.google.gson.JsonObject;
+import io.swagger.v3.core.util.Json;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.duckdns.ibooku.dto.response.book.BookResponseDTO;
 import org.duckdns.ibooku.repository.BookRepository;
 import org.duckdns.ibooku.repository.ReviewRepository;
 import org.duckdns.ibooku.util.JSONUtils;
+import org.duckdns.ibooku.util.StringUtils;
 import org.duckdns.ibooku.util.URLUtils;
 import org.duckdns.ibooku.util.network.Get;
 import org.duckdns.ibooku.util.network.Header;
@@ -23,6 +25,9 @@ import java.util.List;
 @Transactional
 @RequiredArgsConstructor
 public class BookService {
+    @Value("${api-key.library-bigdata}")
+    private String KEY_LIBRARY_BIGDATA;
+
     @Value("${api-key.nl}")
     private String KEY_NL;
 
@@ -55,13 +60,41 @@ public class BookService {
                 String name = book.get("titleInfo").getAsString();
 
                 String[] isbnArray = book.get("isbn").getAsString().split(" ");
-                String isbn = isbnArray.length == 0 ? "-" : isbnArray[0];
+                String isbn = isbnArray.length == 0 ? "" : isbnArray[0];
                 String image = book.get("imageUrl").getAsString();
                 String subject = book.get("kdcName1s").getAsString();
                 String author = book.get("authorInfo").getAsString();
                 String publisher = book.get("pubInfo").getAsString();
                 String content = "";
                 Double point = 0.0;
+
+                if (StringUtils.isNotNullOrEmpty(isbn)) {
+                    url = String.format("https://data4library.kr/api/srchDtlList?authKey=%s&isbn13=%s&format=json", KEY_LIBRARY_BIGDATA, isbn);
+
+                    get = new Get(url)
+                            .setHeader(header)
+                            .execute();
+
+                    responseCode = get.getResponseCode();
+                    if (responseCode != org.apache.http.HttpStatus.SC_OK) {
+                        log.debug("responseCode: {}", responseCode);
+                        throw new RuntimeException("통신 오류: " + get.getUrl());
+                    }
+
+                    JsonObject jobj = JSONUtils.parse(get.getResult());
+                    JsonObject response = jobj.getAsJsonObject("response");
+                    JsonArray details = response.getAsJsonArray("detail");
+
+                    for (Object obj: details) {
+                        JsonObject detail = (JsonObject) obj;
+                        JsonObject bookDetail = detail.getAsJsonObject("book");
+
+                        image = bookDetail.get("bookImageURL").getAsString();
+                        content = bookDetail.get("description").getAsString();
+
+                        break;
+                    }
+                }
 
                 books.add(BookResponseDTO.builder()
                                 .name(name)
@@ -108,13 +141,41 @@ public class BookService {
                 String name = book.get("titleInfo").getAsString();
 
                 String[] isbnArray = book.get("isbn").getAsString().split(" ");
-                String isbn = isbnArray.length == 0 ? "-" : isbnArray[0];
+                String isbn = isbnArray.length == 0 ? "" : isbnArray[0];
                 String image = book.get("imageUrl").getAsString();
                 String subject = book.get("kdcName1s").getAsString();
                 String author = book.get("authorInfo").getAsString();
                 String publisher = book.get("pubInfo").getAsString();
                 String content = "";
                 Double point = 0.0;
+
+                if (StringUtils.isNotNullOrEmpty(isbn)) {
+                    url = String.format("https://data4library.kr/api/srchDtlList?authKey=%s&isbn13=%s&format=json", KEY_LIBRARY_BIGDATA, isbn);
+
+                    get = new Get(url)
+                            .setHeader(header)
+                            .execute();
+
+                    responseCode = get.getResponseCode();
+                    if (responseCode != org.apache.http.HttpStatus.SC_OK) {
+                        log.debug("responseCode: {}", responseCode);
+                        throw new RuntimeException("통신 오류: " + get.getUrl());
+                    }
+
+                    JsonObject jobj = JSONUtils.parse(get.getResult());
+                    JsonObject response = jobj.getAsJsonObject("response");
+                    JsonArray details = response.getAsJsonArray("detail");
+
+                    for (Object obj: details) {
+                        JsonObject detail = (JsonObject) obj;
+                        JsonObject bookDetail = detail.getAsJsonObject("book");
+
+                        image = bookDetail.get("bookImageURL").getAsString();
+                        content = bookDetail.get("description").getAsString();
+
+                        break;
+                    }
+                }
 
                 return BookResponseDTO.builder()
                         .name(name)
