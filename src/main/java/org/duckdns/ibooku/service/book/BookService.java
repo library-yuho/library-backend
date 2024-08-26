@@ -2,11 +2,9 @@ package org.duckdns.ibooku.service.book;
 
 import com.google.gson.JsonArray;
 import com.google.gson.JsonObject;
-import io.swagger.v3.core.util.Json;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.duckdns.ibooku.dto.response.book.BookResponseDTO;
-import org.duckdns.ibooku.repository.BookRepository;
 import org.duckdns.ibooku.repository.ReviewRepository;
 import org.duckdns.ibooku.util.JSONUtils;
 import org.duckdns.ibooku.util.StringUtils;

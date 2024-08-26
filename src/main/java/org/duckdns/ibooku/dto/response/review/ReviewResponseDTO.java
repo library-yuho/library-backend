@@ -11,6 +11,7 @@ public class ReviewResponseDTO {
     private int id;
     private String email;
     private String nickname;
+    private String isbn;
     private String content;
     private boolean isSpoiler;
     private double point;
@@ -18,10 +19,11 @@ public class ReviewResponseDTO {
     private ZonedDateTime createdAt;
 
     @Builder
-    public ReviewResponseDTO(int id, String email, String nickname, String content, boolean isSpoiler, double point, boolean isWriter, ZonedDateTime createdAt) {
+    public ReviewResponseDTO(int id, String email, String nickname, String isbn, String content, boolean isSpoiler, double point, boolean isWriter, ZonedDateTime createdAt) {
         this.id = id;
         this.email = email;
         this.nickname = nickname;
+        this.isbn = isbn;
         this.content = content;
         this.isSpoiler = isSpoiler;
         this.point = point;

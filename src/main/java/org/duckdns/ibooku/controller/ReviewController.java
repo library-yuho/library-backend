@@ -28,4 +28,12 @@ public class ReviewController {
         reviewService.write(reviewRequest);
         return true;
     }
+
+    @GetMapping("/place")
+    public List<ReviewResponseDTO> place(
+            @RequestParam String email,
+            @RequestParam double lat,
+            @RequestParam double lon) {
+        return reviewService.place(email, lat, lon);
+    }
 }

@@ -16,4 +16,7 @@ public interface ReviewRepository extends JpaRepository<Review, Integer> {
 
     @Query(value = "SELECT * FROM review WHERE book_id = (SELECT id FROM book WHERE isbn = :isbn) AND is_spoiler = :isSpoiler ORDER BY point ASC", nativeQuery = true)
     List<Review> findReviewsByIsbnAndIsSpoilerOrderByPointAsc(@Param("isbn") String isbn, @Param("isSpoiler") boolean isSpoiler);
+
+    @Query(value = "SELECT * FROM library l WHERE l.lat BETWEEN :lat - 0.05 AND :lat + 0.05 AND l.lon BETWEEN :lon - 0.05 AND :lon + 0.05", nativeQuery = true)
+    List<Review> findByLatLonRange(@Param("lat") double lat, @Param("lon") double lon);
 }

@@ -3,7 +3,6 @@ package org.duckdns.ibooku.service.review;
 import lombok.RequiredArgsConstructor;
 import org.duckdns.ibooku.dto.request.review.ReviewRequestDTO;
 import org.duckdns.ibooku.dto.response.review.ReviewResponseDTO;
-import org.duckdns.ibooku.entity.book.Book;
 import org.duckdns.ibooku.entity.review.Review;
 import org.duckdns.ibooku.entity.user.User;
 import org.duckdns.ibooku.repository.BookRepository;
@@ -21,7 +20,6 @@ import java.util.stream.Collectors;
 public class ReviewService {
     private final ReviewRepository reviewRepository;
     private final UserRepository userRepository;
-    private final BookRepository bookRepository;
 
     public List<ReviewResponseDTO> list(String isbn, String email, boolean isSpoiler, String sortType) {
         List<Review> reviews;
@@ -44,6 +42,7 @@ public class ReviewService {
                         .id(review.getId())
                         .point(review.getPoint())
                         .email(review.getUser().getEmail())
+                        .isbn(review.getIsbn())
                         .nickname(review.getUser().getNickname())
                         .content(review.getContent())
                         .isSpoiler(review.isSpoiler())
@@ -67,5 +66,21 @@ public class ReviewService {
                 .build();
 
         reviewRepository.save(review);
+    }
+
+    public List<ReviewResponseDTO> place(String email, double lat, double lon) {
+        return reviewRepository.findByLatLonRange(lat, lon).stream()
+                .map(review -> ReviewResponseDTO.builder()
+                        .id(review.getId())
+                        .point(review.getPoint())
+                        .email(review.getUser().getEmail())
+                        .isbn(review.getIsbn())
+                        .nickname(review.getUser().getNickname())
+                        .content(review.getContent())
+                        .isSpoiler(review.isSpoiler())
+                        .createdAt(review.getCreatedAt())
+                        .isWriter(review.getUser().getEmail().equals(email) ? true : false)
+                        .build())
+                .collect(Collectors.toList());
     }
 }
