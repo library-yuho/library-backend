@@ -54,4 +54,9 @@ public class UserController {
     public boolean emailCheck(@RequestParam String email) {
         return userService.emailCheck(email);
     }
+
+    @GetMapping("nickname-check")
+    public boolean nicknameCheck(@RequestParam String nickname) {
+        return userService.nicknameCheck(nickname);
+    }
 }

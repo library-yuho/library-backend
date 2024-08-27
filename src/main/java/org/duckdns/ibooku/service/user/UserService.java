@@ -124,4 +124,14 @@ public class UserService {
 
         return true;
     }
+
+    public boolean nicknameCheck(String nickname) {
+        User user = userRepository.findByNickname(nickname);
+
+        if (user == null) {
+            return false;
+        }
+
+        return true;
+    }
 }
