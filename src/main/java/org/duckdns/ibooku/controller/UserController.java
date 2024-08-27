@@ -28,8 +28,7 @@ public class UserController {
 
     @PostMapping("/join")
     public boolean join(@RequestBody JoinRequestDTO joinRequest) {
-        userService.join(joinRequest);
-        return true;
+        return userService.join(joinRequest);
     }
 
     @PostMapping("/login")

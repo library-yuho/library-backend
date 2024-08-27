@@ -87,7 +87,11 @@ public class UserService {
         return code.toString();
     }
 
-    public void join(JoinRequestDTO joinRequest) {
+    public boolean join(JoinRequestDTO joinRequest) {
+        if (userRepository.findByEmail(joinRequest.getEmail()) != null) {
+            return false;
+        }
+
         User user = User.builder()
                 .email(joinRequest.getEmail())
                 .password(passwordEncoder.encode(joinRequest.getPassword()))
@@ -97,6 +101,8 @@ public class UserService {
                 .build();
 
         userRepository.save(user);
+
+        return true;
     }
 
     public User login(LoginRequestDTO loginRequest) {
