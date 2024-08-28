@@ -11,21 +11,29 @@ public class ReviewResponseDTO {
     private int id;
     private String email;
     private String nickname;
+    private String bookName;
+    private String bookAuthor;
     private String isbn;
     private String content;
     private boolean isSpoiler;
+    private Double lat;
+    private Double lon;
     private double point;
     private boolean isWriter;
     private ZonedDateTime createdAt;
 
     @Builder
-    public ReviewResponseDTO(int id, String email, String nickname, String isbn, String content, boolean isSpoiler, double point, boolean isWriter, ZonedDateTime createdAt) {
+    public ReviewResponseDTO(int id, String email, String nickname, String bookName, String bookAuthor, String isbn, String content, boolean isSpoiler, Double lat, Double lon, double point, boolean isWriter, ZonedDateTime createdAt) {
         this.id = id;
         this.email = email;
         this.nickname = nickname;
+        this.bookName = bookName;
+        this.bookAuthor = bookAuthor;
         this.isbn = isbn;
         this.content = content;
         this.isSpoiler = isSpoiler;
+        this.lat = lat;
+        this.lon = lon;
         this.point = point;
         this.isWriter = isWriter;
         this.createdAt = createdAt;

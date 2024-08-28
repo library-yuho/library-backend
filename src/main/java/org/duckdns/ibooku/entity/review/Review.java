@@ -2,10 +2,8 @@ package org.duckdns.ibooku.entity.review;
 
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotNull;
-import jakarta.validation.constraints.Null;
 import lombok.*;
 import org.duckdns.ibooku.entity.BaseEntity;
-import org.duckdns.ibooku.entity.book.Book;
 import org.duckdns.ibooku.entity.user.User;
 
 @Entity
@@ -37,10 +35,11 @@ public class Review extends BaseEntity {
 
     private double point;
 
-    private boolean isSpoiler;
+    @Column(name = "is_spoiler")
+    private boolean spoiler;
 
     @Builder
-    public Review(int id, User user, String isbn, String content, Double lat, Double lon, double point, boolean isSpoiler) {
+    public Review(int id, User user, String isbn, String content, Double lat, Double lon, double point, boolean spoiler) {
         this.id = id;
         this.user = user;
         this.isbn = isbn;
@@ -48,6 +47,6 @@ public class Review extends BaseEntity {
         this.lat = lat;
         this.lon = lon;
         this.point = point;
-        this.isSpoiler = isSpoiler;
+        this.spoiler = spoiler;
     }
 }
