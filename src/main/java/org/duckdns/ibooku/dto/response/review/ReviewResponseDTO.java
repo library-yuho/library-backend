@@ -2,6 +2,7 @@ package org.duckdns.ibooku.dto.response.review;
 
 import lombok.*;
 
+import java.time.ZoneId;
 import java.time.ZonedDateTime;
 
 @ToString
@@ -36,6 +37,6 @@ public class ReviewResponseDTO {
         this.lon = lon;
         this.point = point;
         this.isWriter = isWriter;
-        this.createdAt = createdAt;
+        this.createdAt = createdAt.withZoneSameInstant(ZoneId.of("Asia/Seoul"));
     }
 }
