@@ -18,9 +18,9 @@ public class ReviewController {
     public List<ReviewResponseDTO> list(
             @RequestParam String isbn,
             @RequestParam String email,
-            @RequestParam boolean isSpoiler,
+            @RequestParam boolean isSpoilerNone,
             @RequestParam String sortType) {
-        return reviewService.list(isbn, email, isSpoiler, sortType);
+        return reviewService.list(isbn, email, isSpoilerNone, sortType);
     }
 
     @PostMapping("/write")

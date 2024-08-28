@@ -31,19 +31,31 @@ public class ReviewService {
     private final ReviewRepository reviewRepository;
     private final UserRepository userRepository;
 
-    public List<ReviewResponseDTO> list(String isbn, String email, boolean spoiler, String sortType) {
+    public List<ReviewResponseDTO> list(String isbn, String email, boolean isSpoilerNone, String sortType) {
         List<Review> reviews;
 
         switch(sortType) {
             case "desc":
-                reviews = reviewRepository.findReviewsByIsbnAndIsSpoilerOrderByPointDesc(isbn, spoiler);
+                if (isSpoilerNone == false) {
+                    reviews = reviewRepository.findReviewsByIsbnOrderByPointDesc(isbn);
+                } else {
+                    reviews = reviewRepository.findReviewsByIsbnAndIsSpoilerNoneOrderByPointDesc(isbn);
+                }
                 break;
             case "asc":
-                reviews = reviewRepository.findReviewsByIsbnAndIsSpoilerOrderByPointAsc(isbn, spoiler);
+                if (isSpoilerNone == false) {
+                    reviews = reviewRepository.findReviewsByIsbnOrderByPointAsc(isbn);
+                } else {
+                    reviews = reviewRepository.findReviewsByIsbnAndIsSpoilerNoneOrderByPointAsc(isbn);
+                }
                 break;
             case "new":
             default:
-                reviews = reviewRepository.findReviewsByIsbnAndIsSpoilerOrderByIdDesc(isbn, spoiler);
+                if (isSpoilerNone == false) {
+                    reviews = reviewRepository.findReviewsByIsbnOrderByIdDesc(isbn);
+                } else {
+                    reviews = reviewRepository.findReviewsByIsbnAndIsSpoilerNoneOrderByIdDesc(isbn);
+                }
                 break;
         }
 
