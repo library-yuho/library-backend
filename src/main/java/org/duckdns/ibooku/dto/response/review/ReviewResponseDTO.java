@@ -15,7 +15,7 @@ public class ReviewResponseDTO {
     private String bookAuthor;
     private String isbn;
     private String content;
-    private boolean isSpoiler;
+    private boolean spoiler;
     private Double lat;
     private Double lon;
     private double point;
@@ -23,7 +23,7 @@ public class ReviewResponseDTO {
     private ZonedDateTime createdAt;
 
     @Builder
-    public ReviewResponseDTO(int id, String email, String nickname, String bookName, String bookAuthor, String isbn, String content, boolean isSpoiler, Double lat, Double lon, double point, boolean isWriter, ZonedDateTime createdAt) {
+    public ReviewResponseDTO(int id, String email, String nickname, String bookName, String bookAuthor, String isbn, String content, boolean spoiler, Double lat, Double lon, double point, boolean isWriter, ZonedDateTime createdAt) {
         this.id = id;
         this.email = email;
         this.nickname = nickname;
@@ -31,7 +31,7 @@ public class ReviewResponseDTO {
         this.bookAuthor = bookAuthor;
         this.isbn = isbn;
         this.content = content;
-        this.isSpoiler = isSpoiler;
+        this.spoiler = spoiler;
         this.lat = lat;
         this.lon = lon;
         this.point = point;
