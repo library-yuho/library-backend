@@ -64,7 +64,7 @@ public class BookService {
                 String author = book.get("authorInfo").getAsString();
                 String publisher = book.get("pubInfo").getAsString();
                 String content = "";
-                Double point = 0.0;
+                Double point = reviewRepository.findAveragePointByIsbn(isbn);
 
                 if (StringUtils.isNotNullOrEmpty(isbn)) {
                     url = String.format("https://data4library.kr/api/srchDtlList?authKey=%s&isbn13=%s&format=json", KEY_LIBRARY_BIGDATA, isbn);
@@ -145,7 +145,7 @@ public class BookService {
                 String author = book.get("authorInfo").getAsString();
                 String publisher = book.get("pubInfo").getAsString();
                 String content = "";
-                Double point = 0.0;
+                Double point = reviewRepository.findAveragePointByIsbn(isbn);
 
                 if (StringUtils.isNotNullOrEmpty(isbn)) {
                     url = String.format("https://data4library.kr/api/srchDtlList?authKey=%s&isbn13=%s&format=json", KEY_LIBRARY_BIGDATA, isbn);

@@ -110,7 +110,7 @@ public class ReviewService {
                             String author = book.get("authorInfo").getAsString();
                             String publisher = book.get("pubInfo").getAsString();
                             String content = "";
-                            Double point = 0.0;
+                            Double point = review.getPoint();
 
                             return ReviewResponseDTO.builder()
                                     .id(review.getId())
