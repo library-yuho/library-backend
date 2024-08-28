@@ -13,10 +13,10 @@ public class BookResponseDTO {
     private String author;
     private String publisher;
     private String content;
-    private double point;
+    private Double point;
 
     @Builder
-    public BookResponseDTO(String name, String isbn, String image, String subject, String author, String publisher, String content, double point) {
+    public BookResponseDTO(String name, String isbn, String image, String subject, String author, String publisher, String content, Double point) {
         this.name = name;
         this.isbn = isbn;
         this.image = image;
