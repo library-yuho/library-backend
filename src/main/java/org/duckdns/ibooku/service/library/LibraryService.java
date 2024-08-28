@@ -39,6 +39,7 @@ public class LibraryService {
                             .id(library.getId())
                             .name(library.getName())
                             .address(library.getAddress())
+                            .libCode(library.getLibCode())
                             .content(library.getContent())
                             .telephone(library.getTelephone())
                             .website(library.getWebsite())
