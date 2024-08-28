@@ -35,7 +35,6 @@ public class Review extends BaseEntity {
 
     private double point;
 
-    @Column(name = "is_spoiler")
     private boolean spoiler;
 
     @Builder

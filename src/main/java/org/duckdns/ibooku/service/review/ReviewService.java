@@ -31,19 +31,19 @@ public class ReviewService {
     private final ReviewRepository reviewRepository;
     private final UserRepository userRepository;
 
-    public List<ReviewResponseDTO> list(String isbn, String email, boolean isSpoiler, String sortType) {
+    public List<ReviewResponseDTO> list(String isbn, String email, boolean spoiler, String sortType) {
         List<Review> reviews;
 
         switch(sortType) {
             case "desc":
-                reviews = reviewRepository.findReviewsByIsbnAndIsSpoilerOrderByPointDesc(isbn, isSpoiler);
+                reviews = reviewRepository.findReviewsByIsbnAndIsSpoilerOrderByPointDesc(isbn, spoiler);
                 break;
             case "asc":
-                reviews = reviewRepository.findReviewsByIsbnAndIsSpoilerOrderByPointAsc(isbn, isSpoiler);
+                reviews = reviewRepository.findReviewsByIsbnAndIsSpoilerOrderByPointAsc(isbn, spoiler);
                 break;
             case "new":
             default:
-                reviews = reviewRepository.findReviewsByIsbnAndIsSpoilerOrderByIdDesc(isbn, isSpoiler);
+                reviews = reviewRepository.findReviewsByIsbnAndIsSpoilerOrderByIdDesc(isbn, spoiler);
                 break;
         }
 
@@ -55,7 +55,7 @@ public class ReviewService {
                         .isbn(review.getIsbn())
                         .nickname(review.getUser().getNickname())
                         .content(review.getContent())
-                        .isSpoiler(review.isSpoiler())
+                        .spoiler(review.isSpoiler())
                         .createdAt(review.getCreatedAt())
                         .isWriter(review.getUser().getEmail().equals(email) ? true : false)
                         .build())
@@ -123,7 +123,7 @@ public class ReviewService {
                                     .content(review.getContent())
                                     .lat(review.getLat())
                                     .lon(review.getLon())
-                                    .isSpoiler(review.isSpoiler())
+                                    .spoiler(review.isSpoiler())
                                     .createdAt(review.getCreatedAt())
                                     .isWriter(review.getUser().getEmail().equals(email) ? true : false)
                                     .build();
