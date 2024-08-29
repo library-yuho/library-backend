@@ -19,7 +19,7 @@ public class BookResponseDTO {
     public BookResponseDTO(String name, String isbn, String image, String subject, String author, String publisher, String content, Double point) {
         this.name = name;
         this.isbn = isbn;
-        this.image = image;
+        this.image = image != null && image.contains("kolis_on") ? "http://cover.nl.go.kr/" + image : image;
         this.subject = subject;
         this.author = author;
         this.publisher = publisher;

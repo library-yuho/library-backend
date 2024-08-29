@@ -83,14 +83,16 @@ public class BookService {
                     JsonObject response = jobj.getAsJsonObject("response");
                     JsonArray details = response.getAsJsonArray("detail");
 
-                    for (Object obj: details) {
-                        JsonObject detail = (JsonObject) obj;
-                        JsonObject bookDetail = detail.getAsJsonObject("book");
+                    if (details != null) {
+                        for (Object obj: details) {
+                            JsonObject detail = (JsonObject) obj;
+                            JsonObject bookDetail = detail.getAsJsonObject("book");
 
-                        image = bookDetail.get("bookImageURL").getAsString();
-                        content = bookDetail.get("description").getAsString();
+                            image = bookDetail.get("bookImageURL").getAsString();
+                            content = bookDetail.get("description").getAsString();
 
-                        break;
+                            break;
+                        }
                     }
                 }
 
